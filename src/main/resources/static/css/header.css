@@ -1,0 +1,28 @@
+#header {
+    position: sticky;
+    top: 0;
+    width: 100vw;
+    height: 60px;
+    background: #F79432;
+    color: #5E3208;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+
+}
+
+#header a {
+    color: #5E3208;
+}
+
+#header a:hover {
+    color: #fff0d3;
+}
+
+.headerSvg {
+    fill-rule: evenodd;
+    clip-rule: evenodd;
+    stroke-linejoin: round;
+    stroke-miterlimit: 2;
+}
