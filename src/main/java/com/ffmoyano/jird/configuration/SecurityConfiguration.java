@@ -39,6 +39,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests(authorize ->
                         authorize
                                 .antMatchers(ALLOWED_RESOURCES).permitAll()
+                                .antMatchers("/**").permitAll()
                                 .antMatchers("/user/**").hasRole("USER")
                                 .antMatchers("/admin/**").hasRole("ADMIN")
                                 .anyRequest().authenticated())
@@ -47,7 +48,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                                 .loginPage("/login")
                                 .usernameParameter("email")
                                 .passwordParameter("password")
-                                .defaultSuccessUrl("/user/index")
+                                .defaultSuccessUrl("/user")
                                 .failureUrl("/login?error")
                                 .permitAll())
                 .logout( logout ->

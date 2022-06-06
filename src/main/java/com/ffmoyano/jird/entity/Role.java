@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "role")
-public class RoleEntity {
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,13 +16,13 @@ public class RoleEntity {
     private String name;
 
     @ManyToMany(mappedBy = "roles")
-    private List<UserEntity> user;
+    private List<AppUser> user;
 
-    public RoleEntity() {
+    public Role() {
 
     }
 
-    public RoleEntity(Long id, String name, List<UserEntity> users) {
+    public Role(Long id, String name, List<AppUser> users) {
         this.id = id;
         this.name = name;
     }
@@ -43,11 +43,11 @@ public class RoleEntity {
         this.name = name;
     }
 
-    public List<UserEntity> getUser() {
+    public List<AppUser> getUser() {
         return user;
     }
 
-    public void setUser(List<UserEntity> user) {
+    public void setUser(List<AppUser> user) {
         this.user = user;
     }
 
@@ -65,7 +65,7 @@ public class RoleEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        RoleEntity that = (RoleEntity) o;
+        Role that = (Role) o;
 
         return id != null ? id.equals(that.id) : that.id == null;
     }

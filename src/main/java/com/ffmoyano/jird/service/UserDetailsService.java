@@ -3,7 +3,7 @@ package com.ffmoyano.jird.service;
 
 
 
-import com.ffmoyano.jird.entity.UserEntity;
+import com.ffmoyano.jird.entity.AppUser;
 import com.ffmoyano.jird.repository.UserRepository;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -23,7 +23,7 @@ public class UserDetailsService implements org.springframework.security.core.use
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        UserEntity user = userRepository.findByEmail(email);
+        AppUser user = userRepository.findByEmail(email);
         if ( user == null) {
             throw new UsernameNotFoundException("User not found in the database");
         }

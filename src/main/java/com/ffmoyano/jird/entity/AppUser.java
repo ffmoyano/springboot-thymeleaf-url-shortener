@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "user")
-public class UserEntity {
+public class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,10 +19,10 @@ public class UserEntity {
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "relation_user_role", joinColumns = @JoinColumn(name = "id_user"), inverseJoinColumns = @JoinColumn(name = "id_role"))
-    private List<RoleEntity> roles;
+    private List<Role> roles;
 
     @OneToMany(mappedBy = "user")
-    private List<LinkEntity> links;
+    private List<Link> links;
 
     public Long getId() {
         return id;
@@ -48,19 +48,19 @@ public class UserEntity {
         this.password = password;
     }
 
-    public List<RoleEntity> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<RoleEntity> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 
-    public List<LinkEntity> getLinks() {
+    public List<Link> getLinks() {
         return links;
     }
 
-    public void setLinks(List<LinkEntity> links) {
+    public void setLinks(List<Link> links) {
         this.links = links;
     }
 
@@ -69,7 +69,7 @@ public class UserEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        UserEntity that = (UserEntity) o;
+        AppUser that = (AppUser) o;
 
         return id != null ? id.equals(that.id) : that.id == null;
     }

@@ -2,12 +2,11 @@ package com.ffmoyano.jird.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name="link")
-public class LinkEntity {
+@Table(name = "link")
+public class Link {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,10 +14,7 @@ public class LinkEntity {
 
     @ManyToOne
     @JoinColumn(name = "id_user")
-    private UserEntity user;
-
-    @OneToMany(mappedBy = "link")
-    private List<VisitEntity> visits;
+    private AppUser user;
 
     private String url;
 
@@ -28,6 +24,7 @@ public class LinkEntity {
 
     private LocalDate expiryDate;
 
+    private Long clicks;
 
     public Long getId() {
         return id;
@@ -37,20 +34,12 @@ public class LinkEntity {
         this.id = id;
     }
 
-    public UserEntity getUser() {
+    public AppUser getUser() {
         return user;
     }
 
-    public void setUser(UserEntity user) {
+    public void setUser(AppUser user) {
         this.user = user;
-    }
-
-    public List<VisitEntity> getVisits() {
-        return visits;
-    }
-
-    public void setVisits(List<VisitEntity> visits) {
-        this.visits = visits;
     }
 
     public String getUrl() {
@@ -85,13 +74,20 @@ public class LinkEntity {
         this.expiryDate = expiryDate;
     }
 
+    public Long getClicks() {
+        return clicks;
+    }
+
+    public void setClicks(Long clicks) {
+        this.clicks = clicks;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        LinkEntity that = (LinkEntity) o;
+        Link that = (Link) o;
 
         return Objects.equals(id, that.id);
     }
@@ -107,13 +103,13 @@ public class LinkEntity {
                 LinkEntity{
                     id='%s',
                     user='%s',
-                    visits='%s',
                     url='%s',
                     shortUrl='%s',
                     permanent='%s',
-                    expiryDate='%s'
-                }""").formatted(this.id, this.user, this.visits,
+                    expiryDate='%s',
+                    clicks='%',
+                }""").formatted(this.id, this.user,
                 this.url, this.shortUrl, this.permanent,
-                this.expiryDate);
+                this.expiryDate, this.clicks);
     }
 }
