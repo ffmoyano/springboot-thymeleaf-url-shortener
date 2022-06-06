@@ -2,7 +2,7 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <link rel="stylesheet" th:href="@{/css/header.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{/css/main.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/auth.css}" type="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Jird - Acortador de Enlaces</title>
@@ -13,7 +13,13 @@
         <p class="left20 bold ellipsisText200" sec:authentication="name"></p>
     </div>
     <div>
-        <a class="right20 font0" sec:authorize="hasRole('ROLE_USER')" id="userButton" th:href="@{/user/index}">
+        <form action="#" th:action="@{/logout}" th:method="delete" >
+            <button type="submit"> </button>
+        </form>
+
+    </div>
+    <div>
+        <a class="right20 font0" sec:authorize="hasRole('ROLE_USER')" id="userButton" th:href="@{/user}">
             <svg class="height32 headerSvg" viewBox="0 0 28 30" xmlns="http://www.w3.org/2000/svg" xml:space="preserve"
                  title="User Profile Link">
     <g transform="matrix(1,0,0,1,-2.06234,-0.75856)">
@@ -27,8 +33,9 @@
     </g>
 </svg>
         </a>
-        <a class="right20" sec:authorize="hasRole('ROLE_ADMIN')" id="adminButton" th:href="@{/admin/panel}">
-            <svg class="height32 headerSvg" viewBox="0 0 477 471" xmlns="http://www.w3.org/2000/svg" title="Admin Panel Link"
+        <a class="right20" sec:authorize="hasRole('ROLE_ADMIN')" id="adminButton" th:href="@{/admin}">
+            <svg class="height32 headerSvg" viewBox="0 0 477 471" xmlns="http://www.w3.org/2000/svg"
+                 title="Admin Panel Link"
                  xml:space="preserve">
     <g transform="matrix(1,0,0,1,-21.7717,-24.64)">
         <g transform="matrix(2.86832,0,0,2.86832,-180.569,-366.897)">

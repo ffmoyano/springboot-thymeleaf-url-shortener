@@ -12,35 +12,40 @@ import java.net.URI;
 
 
 @Controller
-public class MainController {
+public class AuthController {
 
     private final VerificationService verificationService;
 
-    public MainController(VerificationService verificationService) {
+    public AuthController(VerificationService verificationService) {
         this.verificationService = verificationService;
     }
 
 
 
     @GetMapping("/{shortUrl}")
-    public ResponseEntity redirect(@PathVariable(value = "shortUrl") String shortUrl) {
+    public ResponseEntity<String> redirect(@PathVariable(value = "shortUrl") String shortUrl) {
         return ResponseEntity.status(HttpStatus.FOUND)
-                .location(URI.create("http://www.yahoo.com"))
+                .location(URI.create("http://www.google.es"))
                 .build();
     }
 
     @GetMapping({"", "/login"})
     public String login(Model model) {
         if(verificationService.isAuthenticated()) {
-            return index();
+            return user();
         } else {
             return "login";
         }
 
     }
 
-    @GetMapping({ "/user"})
-    public String index() {
-        return "index";
+    @GetMapping({ "/user/"})
+    public String user() {
+        return "user";
+    }
+
+    @GetMapping({ "/logout"})
+    public String logout() {
+        return "logout";
     }
 }
