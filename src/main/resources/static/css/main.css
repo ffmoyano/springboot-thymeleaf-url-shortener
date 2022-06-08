@@ -1,0 +1,96 @@
+input[type="submit"] {
+    background: #F79432;
+    color: #5E3208;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+
+input[type="text"]:focus, input[type="password"]:focus {
+    outline: #F79432 solid 4px;
+    outline-offset: -4px;
+    animation: outlineInputOpacity 300ms;
+}
+
+
+input[type="submit"]:hover {
+    background-color: #f38a19;
+    transition: background-color 100ms;
+}
+
+input[type="submit"]:active, input[type="submit"]:focus {
+    border-color: #5E3208; /* here configure as your needs */
+    outline: #5E3208 solid 4px;
+    outline-offset: -4px;
+    animation: outlineSubmitOpacity 300ms
+}
+
+@keyframes outlineInputOpacity {
+    0% {
+        outline-color: rgba(255, 154, 45, 0%);
+    }
+    100% {
+        outline-color: rgba(255, 154, 45, 100%);
+    }
+}
+
+@keyframes outlineSubmitOpacity {
+    0% {
+        outline-color: rgba(255, 154, 45, 0%);
+    }
+    100% {
+        outline-color: rgb(94, 50, 8);
+    }
+}
+
+#newUrlContainer {
+    display: flex;
+    justify-content: center;
+}
+
+#newUrlBox {
+    background: white;
+    padding: 40px;
+    box-shadow: 0 0 15px 3px rgba(22, 16, 1, 0.13);
+    border-radius: 6px;
+    margin: 50px 20px;
+    max-width: 800px;
+    width: 100%;
+}
+
+#newUrlBox div {
+    display: flex;
+    justify-content: center;
+}
+
+#newUrlButton {
+    border-radius: 0 8px 8px 0;
+    padding: 12px 36px;
+}
+
+#newUrlInput {
+    border-radius: 8px 0 0 8px;
+    width: 100%;
+}
+
+@media (max-width: 1024px) {
+    #newUrlBox {
+        background: transparent;
+        box-shadow: none;
+        padding: 0;
+        margin: 50px 20px;
+        max-width: 800px;
+        width: 100%;
+    }
+
+    #newUrlButton {
+        border-radius: 0 8px 8px 0;
+        padding: 12px;
+    }
+
+
+
+}

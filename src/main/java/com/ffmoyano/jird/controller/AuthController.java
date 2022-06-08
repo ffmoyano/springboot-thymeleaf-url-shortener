@@ -1,6 +1,6 @@
 package com.ffmoyano.jird.controller;
 
-import com.ffmoyano.jird.service.VerificationService;
+import com.ffmoyano.jird.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -14,10 +14,10 @@ import java.net.URI;
 @Controller
 public class AuthController {
 
-    private final VerificationService verificationService;
+    private final UserService userService;
 
-    public AuthController(VerificationService verificationService) {
-        this.verificationService = verificationService;
+    public AuthController(UserService userService) {
+        this.userService = userService;
     }
 
 
@@ -31,18 +31,14 @@ public class AuthController {
 
     @GetMapping({"", "/login"})
     public String login(Model model) {
-        if(verificationService.isAuthenticated()) {
-            return user();
+        if(userService.isUserAuthenticated()) {
+            return "redirect:/user/links";
         } else {
             return "login";
         }
 
     }
 
-    @GetMapping({ "/user/"})
-    public String user() {
-        return "user";
-    }
 
     @GetMapping({ "/logout"})
     public String logout() {

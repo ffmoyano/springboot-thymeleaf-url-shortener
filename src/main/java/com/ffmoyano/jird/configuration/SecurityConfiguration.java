@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import java.util.List;
 
 @EnableWebSecurity
 @Configuration
@@ -48,7 +47,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                                 .loginPage("/login")
                                 .usernameParameter("email")
                                 .passwordParameter("password")
-                                .defaultSuccessUrl("/user/")
+                                .defaultSuccessUrl("/user/links")
                                 .failureUrl("/login?error")
                                 .permitAll())
                 .logout( logout ->
@@ -60,32 +59,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
     }
-
-    //    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.sessionManagement()
-//                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
-//
-//        http.csrf().disable()
-//                .authorizeRequests(authorizeRequests ->
-//                        authorizeRequests
-//                                .antMatchers("/", "/login").permitAll()
-//                                .antMatchers("/admin/**").hasAnyRole("ADMIN")
-//                                .antMatchers("/user/**").hasAnyRole("USER")
-//                                .anyRequest().authenticated()
-//                )
-//                .passwordManagement(passwordManagement ->
-//                        passwordManagement
-//                                .changePasswordPage("/forgotPassword"))
-//                .formLogin(formLogin ->
-//                        formLogin
-//                                .loginPage("/login")
-//                                .defaultSuccessUrl("/login", true)
-//                                .failureUrl("/loginError")
-//                                .permitAll()
-//                )
-//                .rememberMe();
-//    }
-
 
 }
