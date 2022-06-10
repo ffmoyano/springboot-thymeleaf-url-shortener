@@ -78,4 +78,17 @@ public class AppUser {
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
     }
+
+    @Override
+    public String toString() {
+        return ("""
+                AppUser{
+                    id='%s',
+                    email='%s',
+                    password='%s',
+                    roles='%s',
+                    links='%s'
+                }""").formatted(this.id, this.email, this.password,
+                this.roles, this.links);
+    }
 }

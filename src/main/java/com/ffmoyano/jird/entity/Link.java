@@ -18,6 +18,7 @@ public class Link {
 
     private String url;
 
+    @Column(unique = true)
     private String shortUrl;
 
     private boolean permanent;
@@ -107,9 +108,7 @@ public class Link {
                     shortUrl='%s',
                     permanent='%s',
                     expiryDate='%s',
-                    clicks='%',
-                }""").formatted(this.id, this.user,
-                this.url, this.shortUrl, this.permanent,
-                this.expiryDate, this.clicks);
+                    clicks='%s',
+                }""").formatted(this.id, this.user, this.url, this.shortUrl, this.permanent, this.expiryDate, this.clicks);
     }
 }

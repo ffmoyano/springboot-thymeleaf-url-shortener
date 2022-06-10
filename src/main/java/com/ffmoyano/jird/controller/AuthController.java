@@ -30,7 +30,7 @@ public class AuthController {
     }
 
     @GetMapping({"", "/login"})
-    public String login(Model model) {
+    public String login() {
         if(userService.isUserAuthenticated()) {
             return "redirect:/user/links";
         } else {

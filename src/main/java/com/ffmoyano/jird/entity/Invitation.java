@@ -9,9 +9,12 @@ public class Invitation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private String code;
 
     private boolean claimed;
+    @Column(unique = true)
+    private String email;
 
     public Long getId() {
         return id;
@@ -35,5 +38,13 @@ public class Invitation {
 
     public void setClaimed(boolean claimed) {
         this.claimed = claimed;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
