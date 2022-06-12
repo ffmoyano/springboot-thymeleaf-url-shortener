@@ -86,9 +86,8 @@ public class AppUser {
                     id='%s',
                     email='%s',
                     password='%s',
-                    roles='%s',
-                    links='%s'
+                    roles='%s'
                 }""").formatted(this.id, this.email, this.password,
-                this.roles, this.links);
+                this.roles);
     }
 }

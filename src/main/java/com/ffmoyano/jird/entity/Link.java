@@ -1,5 +1,8 @@
 package com.ffmoyano.jird.entity;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.annotations.ColumnDefault;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -25,7 +28,10 @@ public class Link {
 
     private LocalDate expiryDate;
 
-    private Long clicks;
+    private long clicks;
+
+
+
 
     public Long getId() {
         return id;
@@ -75,11 +81,11 @@ public class Link {
         this.expiryDate = expiryDate;
     }
 
-    public Long getClicks() {
+    public long getClicks() {
         return clicks;
     }
 
-    public void setClicks(Long clicks) {
+    public void setClicks(long clicks) {
         this.clicks = clicks;
     }
 
@@ -101,14 +107,16 @@ public class Link {
     @Override
     public String toString() {
         return ("""
-                LinkEntity{
+                Link{
                     id='%s',
                     user='%s',
                     url='%s',
                     shortUrl='%s',
                     permanent='%s',
                     expiryDate='%s',
-                    clicks='%s',
-                }""").formatted(this.id, this.user, this.url, this.shortUrl, this.permanent, this.expiryDate, this.clicks);
+                    clicks='%s'
+                }""").formatted(this.id, this.user, this.url,
+                this.shortUrl, this.permanent, this.expiryDate,
+                this.clicks);
     }
 }

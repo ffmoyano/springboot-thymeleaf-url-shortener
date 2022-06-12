@@ -5,10 +5,7 @@ import com.ffmoyano.jird.service.LinkService;
 import org.apache.commons.validator.routines.UrlValidator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/user/")
@@ -28,10 +25,13 @@ public class UserController {
     }
 
     @PostMapping({"/links"})
-    public String insert(@RequestBody String url, Model model) {
+    public String insert(@RequestParam("newUrl") String url, Model model) {
         boolean isUrlValid = linkService.checkIsValid(url);
+
+        Link link = linkService.createLinkFromUrl(url);
+        System.out.println(link.toString());
         if(isUrlValid) {
-            Link link = linkService.createLinkFromUrl(url);
+            System.out.println("VALIDOOOO");
             linkService.save(link);
         } else {
             model.addAttribute("urlError", "La dirección provista no es válida");

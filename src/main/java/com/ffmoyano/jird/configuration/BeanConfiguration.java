@@ -1,6 +1,6 @@
 package com.ffmoyano.jird.configuration;
 
-import org.apache.commons.lang3.RandomStringUtils;
+
 import org.apache.commons.validator.routines.UrlValidator;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
@@ -14,7 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import java.util.Objects;
 
 @Configuration
-public class ApplicationConfiguration {
+public class BeanConfiguration {
 
     @Bean
     public BCryptPasswordEncoder encoder() {
@@ -36,11 +36,6 @@ public class ApplicationConfiguration {
     @Bean
     UrlValidator urlValidator() {
         return new UrlValidator();
-    }
-
-    @Bean
-    RandomStringUtils randomStringUtils() {
-        return new RandomStringUtils();
     }
 
 }

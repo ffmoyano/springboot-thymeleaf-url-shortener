@@ -1,40 +1,31 @@
 package com.ffmoyano.jird.configuration;
 
-import com.ffmoyano.jird.service.UserDetailsService;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
+import org.springframework.security.web.SecurityFilterChain;
 
 @EnableWebSecurity
 @Configuration
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class SecurityConfiguration {
 
-    private final String[] ALLOWED_RESOURCES = {"/login", "/resources/**", "/static/**", "/css/**", "/icon/**", "/js/**","/logo/**",  "/favicon.ico"};
+    private final String[] ALLOWED_RESOURCES = {"/login", "/resources/**", "/static/**", "/css/**", "/icon/**", "/js/**", "/logo/**", "/favicon.ico"};
 
-    private final UserDetailsService userDetailsService;
-
-    private final BCryptPasswordEncoder encoder;
-
-
-    public SecurityConfiguration(UserDetailsService userDetailsService, BCryptPasswordEncoder encoder) {
-        this.userDetailsService = userDetailsService;
-        this.encoder = encoder;
+    // UserDetails: UserService which implements UserDetailsService, overrided method loadUserByUsername
+    // PasswordEncoder: BCryptPasswordEncoder, whose bean is declared in BeanConfiguration, retrieved by
+    //      internal AuthenticationConfiguration method getPasswordEncoder()
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
     }
 
+    @Bean
+    public SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(encoder);
-    }
-
-    @Override
-    protected void configure(final HttpSecurity http) throws Exception {
-
-        http
+        return http
                 .authorizeRequests(authorize ->
                         authorize
                                 .antMatchers(ALLOWED_RESOURCES).permitAll()
@@ -50,13 +41,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                                 .defaultSuccessUrl("/user/links")
                                 .failureUrl("/login?error")
                                 .permitAll())
-                .logout( logout ->
+                .logout(logout ->
                         logout
                                 .logoutUrl("/logout")
                                 .logoutSuccessUrl("/login")
                                 .invalidateHttpSession(true)
-                                .deleteCookies());
-
+                                .deleteCookies())
+                .build();
 
     }
 

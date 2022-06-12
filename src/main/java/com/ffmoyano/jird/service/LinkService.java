@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Service
@@ -19,16 +20,18 @@ public class LinkService {
     private final LinkRepository linkRepository;
     private final UrlValidator urlValidator;
 
-    private final RandomStringUtils randomStringUtils;
 
-    public LinkService(UserService userService, LinkRepository linkRepository, UrlValidator urlValidator, RandomStringUtils randomStringUtils) {
+    public LinkService(UserService userService, LinkRepository linkRepository, UrlValidator urlValidator) {
         this.userService = userService;
         this.linkRepository = linkRepository;
         this.urlValidator = urlValidator;
-        this.randomStringUtils = randomStringUtils;
     }
 
     public boolean checkIsValid(String url) {
+        if(!url.startsWith("http://") && !url.startsWith("https://")) {
+            url = "http://" + url;
+        }
+
         return urlValidator.isValid(url);
     }
 
@@ -44,7 +47,7 @@ public class LinkService {
         link.setPermanent(true);
         link.setExpiryDate(null);
         link.setUser(userService.getUserFromSession());
-        return linkRepository.save(link);
+        return link;
     }
 
     @Transactional(readOnly = false)
@@ -53,18 +56,34 @@ public class LinkService {
     }
 
 
-    private String generateShortUrl(int length) {
-        int stringLength = length;
+    /**
+     * <b>Produces and return a string for short url to create the link before saving in the database.</b>
+     * <p>
+     * Generates ten different random strings to act as shortUrl, starting at 5 characters.
+     * If all random strings are already present in database, the method executes itself again with
+     * one more character. If one or more strings are still not used in database, it returns the first available.
+     * </p>
+     * @param shortUrlLength - the number of characters we want for the new short url
+     * @return -
+     */
+    private String generateShortUrl(int shortUrlLength) {
+        int length = shortUrlLength;
         List<String> randomStrings = new ArrayList<>();
         IntStream.range(0, 6)
-                .forEach(index -> randomStrings.add(randomStringUtils.random(length)));
-        for (String randomString : randomStrings) {
-            Link link = linkRepository.findByShortUrl(randomString);
-            if(link == null) {
-                return randomString;
-            }
+                .forEach(index -> randomStrings.add(RandomStringUtils.random(length, true, true)));
+
+        List<String> existingShortUrls =
+                linkRepository.findByShortUrlIn(randomStrings).stream()
+                        .map(link -> link.getShortUrl())
+                        .collect(Collectors.toList());
+
+        randomStrings.removeAll(existingShortUrls);
+        if (randomStrings.size() > 0) {
+            return randomStrings.get(0);
+        } else {
+            return generateShortUrl(shortUrlLength++);
         }
-        return generateShortUrl(stringLength++);
+
     }
 
 }

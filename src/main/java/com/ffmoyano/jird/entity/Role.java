@@ -51,14 +51,7 @@ public class Role {
         this.user = user;
     }
 
-    @Override
-    public String toString() {
-        return ("""
-                RoleEntity{
-                    id='%s',
-                    name='%s'
-                }""").formatted(this.id, this.name);
-    }
+
 
     @Override
     public boolean equals(Object o) {
