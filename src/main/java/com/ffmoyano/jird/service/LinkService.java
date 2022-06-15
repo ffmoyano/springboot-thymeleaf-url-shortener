@@ -7,6 +7,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.validator.routines.UrlValidator;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,7 @@ public class LinkService {
     }
 
     public boolean checkIsValid(String url) {
-        if(!url.startsWith("http://") && !url.startsWith("https://")) {
+        if (!url.startsWith("http://") && !url.startsWith("https://")) {
             url = "http://" + url;
         }
 
@@ -44,8 +45,6 @@ public class LinkService {
         Link link = new Link();
         link.setUrl(url);
         link.setShortUrl(generateShortUrl(5));
-        link.setPermanent(true);
-        link.setExpiryDate(null);
         link.setUser(userService.getUserFromSession());
         return link;
     }
@@ -63,6 +62,7 @@ public class LinkService {
      * If all random strings are already present in database, the method executes itself again with
      * one more character. If one or more strings are still not used in database, it returns the first available.
      * </p>
+     *
      * @param shortUrlLength - the number of characters we want for the new short url
      * @return -
      */
@@ -73,7 +73,9 @@ public class LinkService {
                 .forEach(index -> randomStrings.add(RandomStringUtils.random(length, true, true)));
 
         List<String> existingShortUrls =
-                linkRepository.findByShortUrlIn(randomStrings).stream()
+                linkRepository
+                        .findByShortUrlIn(randomStrings)
+                        .stream()
                         .map(link -> link.getShortUrl())
                         .collect(Collectors.toList());
 
@@ -85,5 +87,4 @@ public class LinkService {
         }
 
     }
-
 }

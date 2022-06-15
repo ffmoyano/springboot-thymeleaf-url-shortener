@@ -8,9 +8,11 @@
   <meta charset="utf-8" />
   <link rel="stylesheet" href="css/main.css" th:href="@{/css/auth.css}" />
 </head>
-<body th:with="httpStatus=${T(org.springframework.http.HttpStatus).valueOf(#response.status)}">
-<h1 th:text="|${httpStatus} - ${httpStatus.reasonPhrase}|">404</h1>
-<p th:utext="${errorMessage}">Error java.lang.NullPointerException</p>
-<a href="links.html" th:href="@{/index}">Back to Home Page</a>
+
+<body>
+<h1 th:text="${error}"></h1>
+
+<a th:href="@{/user/links}">Volver a la página principal</a>
+
 </body>
 </html>

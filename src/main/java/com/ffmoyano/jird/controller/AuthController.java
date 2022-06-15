@@ -22,12 +22,12 @@ public class AuthController {
 
 
 
-    @GetMapping("/{shortUrl}")
-    public ResponseEntity<String> redirect(@PathVariable(value = "shortUrl") String shortUrl) {
-        return ResponseEntity.status(HttpStatus.FOUND)
-                .location(URI.create("http://www.google.es"))
-                .build();
-    }
+//    @GetMapping("/{shortUrl}")
+//    public ResponseEntity<String> redirect(@PathVariable(value = "shortUrl") String shortUrl) {
+////        return ResponseEntity.status(HttpStatus.FOUND)
+////                .location(URI.create("http://www.google.es"))
+////                .build();
+//    }
 
     @GetMapping({"", "/login"})
     public String login() {

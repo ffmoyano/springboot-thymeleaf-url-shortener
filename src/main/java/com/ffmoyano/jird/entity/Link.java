@@ -2,6 +2,8 @@ package com.ffmoyano.jird.entity;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -24,14 +26,7 @@ public class Link {
     @Column(unique = true)
     private String shortUrl;
 
-    private boolean permanent;
-
-    private LocalDate expiryDate;
-
     private long clicks;
-
-
-
 
     public Long getId() {
         return id;
@@ -57,28 +52,12 @@ public class Link {
         this.url = url;
     }
 
-    public boolean isPermanent() {
-        return permanent;
-    }
-
-    public void setPermanent(boolean permanent) {
-        this.permanent = permanent;
-    }
-
     public String getShortUrl() {
         return shortUrl;
     }
 
     public void setShortUrl(String shortUrl) {
         this.shortUrl = shortUrl;
-    }
-
-    public LocalDate getExpiryDate() {
-        return expiryDate;
-    }
-
-    public void setExpiryDate(LocalDate expiryDate) {
-        this.expiryDate = expiryDate;
     }
 
     public long getClicks() {
@@ -88,6 +67,7 @@ public class Link {
     public void setClicks(long clicks) {
         this.clicks = clicks;
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -112,11 +92,8 @@ public class Link {
                     user='%s',
                     url='%s',
                     shortUrl='%s',
-                    permanent='%s',
-                    expiryDate='%s',
                     clicks='%s'
                 }""").formatted(this.id, this.user, this.url,
-                this.shortUrl, this.permanent, this.expiryDate,
-                this.clicks);
+                this.shortUrl, this.clicks);
     }
 }

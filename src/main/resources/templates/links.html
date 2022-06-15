@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <script th:src="@{/js/links.js}"></script>
 
 </head>
 
@@ -18,13 +18,35 @@
     <div id="newUrlContainer">
         <div id="newUrlBox">
             <form th:action="@{/user/links}" th:method="post">
-                <div><input placeholder="Introduce Url" width="100%" type="text" id="newUrlInput"
+                <div><input onclick="hideUrlError()" placeholder="Introduce Url" width="100%" type="text" id="newUrlInput"
                             name="newUrl"/>
                     <!--                        onclick="hideLoginError()"-->
                     <input type="submit" id="newUrlButton" value="Acortar"/>
                 </div>
             </form>
         </div>
+    </div>
+    <div  class="flexCenter height43 bottom20">
+        <div  th:if="${urlError != null}"  th:text="${urlError}" class="errorDialog" id="hidableUrlError"/>
+    </div>
+
+    <div th:if="${links != null && !links.empty}" class="flexCenter">
+        <table>
+            <tr>
+                <th class="notMobile">Acortado</th>
+                <th>Dirección</th>
+                <th>Visitas</th>
+                <th>Acciones</th>
+            </tr>
+            <tr th:each="link: ${links}">
+                <td class="notMobile" th:text="${baseUrl + link.shortUrl}"> </td>
+                <td th:text="${link.url}"> </td>
+                <td th:text="${link.clicks}"></td>
+                <td></td>
+            </tr>
+        </table>
+
+
     </div>
 
 </main>
