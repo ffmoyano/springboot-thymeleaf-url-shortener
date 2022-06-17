@@ -41,6 +41,11 @@ public class LinkService {
         return linkRepository.findByUser(userService.getUserFromSession());
     }
 
+    @Transactional(readOnly = true)
+    public Link findByShortUrl(String shortUrl) {
+        return linkRepository.findByShortUrl(shortUrl);
+    }
+
     public Link createLinkFromUrl(String url) {
         Link link = new Link();
         link.setUrl(url);

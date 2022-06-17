@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @EnableWebSecurity
 @Configuration
@@ -29,22 +30,25 @@ public class SecurityConfiguration {
                 .authorizeRequests(authorize ->
                         authorize
                                 .antMatchers(ALLOWED_RESOURCES).permitAll()
-                                .antMatchers("/*").permitAll()  //we dont want to allow subfolders, only shorturl param
-                                .antMatchers("/user/**").hasRole("USER")
+                                .antMatchers("/*").permitAll()  //we dont want to allow subfolders, only shorturl param so only one asterisk
+                                .antMatchers("/auth/**").permitAll()
+                                .antMatchers("/link/**", "/user/**").hasRole("USER")
                                 .antMatchers("/admin/**").hasRole("ADMIN")
                                 .anyRequest().authenticated())
                 .formLogin(formLogin ->
                         formLogin
-                                .loginPage("/login")
+                                .loginPage("/auth/login")
                                 .usernameParameter("email")
                                 .passwordParameter("password")
-                                .defaultSuccessUrl("/user/links")
-                                .failureUrl("/login?error")
+                                .defaultSuccessUrl("/link/")
+                                .failureUrl("/auth/login?error")
                                 .permitAll())
                 .logout(logout ->
                         logout
-                                .logoutUrl("/logout")
-                                .logoutSuccessUrl("/login")
+                                .logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout", "GET"))
+                                .invalidateHttpSession(true)
+                                .deleteCookies("JSESSIONID")
+                                .logoutSuccessUrl("/auth/login")
                                 .invalidateHttpSession(true)
                                 .deleteCookies())
                 .build();

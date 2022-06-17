@@ -7,11 +7,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.net.URI;
 
 
 @Controller
+@RequestMapping("/auth")
 public class AuthController {
 
     private final UserService userService;
@@ -21,18 +23,10 @@ public class AuthController {
     }
 
 
-
-//    @GetMapping("/{shortUrl}")
-//    public ResponseEntity<String> redirect(@PathVariable(value = "shortUrl") String shortUrl) {
-////        return ResponseEntity.status(HttpStatus.FOUND)
-////                .location(URI.create("http://www.google.es"))
-////                .build();
-//    }
-
-    @GetMapping({"", "/login"})
+    @GetMapping( "/login")
     public String login() {
         if(userService.isUserAuthenticated()) {
-            return "redirect:/user/links";
+            return "redirect:/link/";
         } else {
             return "login";
         }
@@ -40,8 +34,4 @@ public class AuthController {
     }
 
 
-    @GetMapping({ "/logout"})
-    public String logout() {
-        return "logout";
-    }
 }

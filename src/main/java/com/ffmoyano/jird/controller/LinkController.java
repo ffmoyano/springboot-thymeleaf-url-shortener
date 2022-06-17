@@ -6,23 +6,23 @@ import org.apache.commons.validator.routines.UrlValidator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-@RequestMapping("/user/")
-public class UserController {
+@RequestMapping("/link")
+public class LinkController {
 
     private final UrlValidator urlValidator;
     private final LinkService linkService;
 
-    public UserController(UrlValidator urlValidator, LinkService linkService) {
+    public LinkController(UrlValidator urlValidator, LinkService linkService) {
         this.urlValidator = urlValidator;
         this.linkService = linkService;
     }
 
-    @GetMapping({"/links"})
+
+    @GetMapping({"/"})
     public String links(Model model, HttpServletRequest request) {
         model.addAttribute("links", linkService.findByUser());
         String baseUrl = request.getServerName();
@@ -30,7 +30,7 @@ public class UserController {
         return "links";
     }
 
-    @PostMapping({"/links"})
+    @PostMapping({"/"})
     public String insert(@RequestParam("newUrl") String url, Model model, HttpServletRequest request) {
         boolean isUrlValid = linkService.checkIsValid(url);
 

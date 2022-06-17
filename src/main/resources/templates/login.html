@@ -21,7 +21,7 @@
             <p id="loginTab" onclick="selectForm('login')">Login</p>
             <p id="signUpTab" onclick="selectForm('signup')">Registro</p>
         </div>
-        <form th:action="@{/login}" method="post" id="loginForm">
+        <form th:action="@{/auth/login}" method="post" id="loginForm">
             <!-- name attribute in login inputs are defined in spring security loginForm (usernameParameter and passwordParameter),
              if not defined their default names are username and password -->
             <div class="loginInputDiv bottom40"><img th:src="@{/icon/email.svg}" alt="mail icon"
@@ -43,7 +43,7 @@
 
             <input class="width100" type="submit" value="LOGIN"/>
         </form>
-        <form th:action="@{/signUp}" method="post" id="signUpForm">
+        <form th:action="@{/auth/signUp}" method="post" id="signUpForm">
             <div class="loginInputDiv bottom40"><img th:src="@{/icon/smiley.svg}" alt="invite icon"
                                                      class="loginIcon"/> <input placeholder="Código Invitación"
                                                                                 type="text"

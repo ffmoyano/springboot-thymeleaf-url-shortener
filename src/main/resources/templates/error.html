@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Error page</title>
+    <title>Error page</title>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta charset="utf-8" />
-  <link rel="stylesheet" href="css/main.css" th:href="@{/css/auth.css}" />
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="css/main.css" th:href="@{/css/auth.css}"/>
 </head>
 
 <body>
 <h1 th:text="${error}"></h1>
 
-<a th:href="@{/user/links}">Volver a la página principal</a>
+<a th:href="@{/link/}">Volver a la página principal</a>
 
 </body>
 </html>
