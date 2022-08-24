@@ -12,7 +12,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 public class SecurityConfiguration {
 
-    private final String[] ALLOWED_RESOURCES = {"/login", "/resources/**", "/static/**", "/css/**", "/icon/**", "/js/**", "/logo/**", "static/favicon.ico"};
+    private final String[] ALLOWED_RESOURCES = {"/login", "/resources/**", "/static/**", "/css/**", "/icon/**", "/js/**", "/logo/**", "/favicon.ico"};
 
     // UserDetails: UserService which implements UserDetailsService, overrided method loadUserByUsername
     // PasswordEncoder: BCryptPasswordEncoder, whose bean is declared in BeanConfiguration, retrieved by

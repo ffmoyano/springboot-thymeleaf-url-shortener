@@ -10,24 +10,21 @@
 
 <body>
 <header th:replace="fragments/header"/>
-<!--<form th:action="@{/logout}" th:method="post">-->
-<!--    <button type="submit" style="background: url(static/icon/logout.svg); background-size:cover"></button>-->
-<!--</form>-->
 
 <main>
     <div id="newUrlContainer">
         <div id="newUrlBox">
             <form th:action="@{/user/links}" th:method="post">
-                <div><input onclick="hideUrlError()" placeholder="Introduce Url" width="100%" type="text" id="newUrlInput"
+                <div><input onclick="hideUrlError()" placeholder="Introduce Url" width="100%" type="text"
+                            id="newUrlInput"
                             name="newUrl"/>
-                    <!--                        onclick="hideLoginError()"-->
                     <input type="submit" id="newUrlButton" value="Acortar"/>
                 </div>
             </form>
         </div>
     </div>
-    <div  class="flexCenter height43 bottom20">
-        <div  th:if="${urlError != null}"  th:text="${urlError}" class="errorDialog" id="hidableUrlError"/>
+    <div class="flexCenter height43 bottom20">
+        <div th:if="${urlError != null}" th:text="${urlError}" class="errorDialog" id="hidableUrlError"/>
     </div>
 
     <div th:if="${links != null && !links.empty}" class="flexCenter">
@@ -39,10 +36,38 @@
                 <th>Acciones</th>
             </tr>
             <tr th:each="link: ${links}">
-                <td class="notMobile" th:text="${baseUrl + link.shortUrl}"> </td>
-                <td th:text="${link.url}"> </td>
+                <td class="notMobile" th:text="${baseUrl + link.shortUrl}"></td>
+                <td><a th:href="|${link.url}|" th:text="${link.url}" target="_blank"></a></td>
                 <td th:text="${link.clicks}"></td>
-                <td></td>
+                <td>
+                    <button title="Copiar al portapapeles" th:shorturl="${baseUrl + link.shortUrl}"
+                            th:onclick="copyToClipboard(this.getAttribute('shorturl'))">
+                        <svg width="24px" height="24px" viewBox="0 0 144 174"
+                             xmlns="http://www.w3.org/2000/svg"
+                             xml:space="preserve"
+                             style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;"><path d="M136.044,54.625c-0,-7.316 -5.939,-13.255 -13.255,-13.255l-68.164,0c-7.316,0 -13.255,5.939 -13.255,13.255l0,98.407c0,7.315 5.939,13.254 13.255,13.254l68.164,0c7.316,0 13.255,-5.939 13.255,-13.254l-0,-98.407Z" style="fill:#fff;fill-opacity:0;stroke:#5E3208;stroke-width:14px;"/>
+                            <path d="M41.37,131.916l0,-77.291c0,-7.316 5.939,-13.255 13.255,-13.255l47.048,0l0,-21.116c0,-7.315 -5.939,-13.254 -13.254,-13.254l-68.165,-0c-7.315,-0 -13.254,5.939 -13.254,13.254l0,98.408c0,7.315 5.939,13.254 13.254,13.254l21.116,0Z"
+                                  style="fill:#fff;fill-opacity:0;stroke:#5E3208;stroke-width:14px;"/></svg>
+                    </button>
+                    <form style="display: inline" th:action="@{'/link/delete/{id}'(id=${link.id})}" th:method="delete">
+                        <input type="hidden" name="_method" value="delete" />
+                        <button type="submit" title="Eliminar enlace">
+                            <svg width="24px" height="24px" viewBox="0 0 100 133"
+                                 xmlns="http://www.w3.org/2000/svg"
+                                 xml:space="preserve"
+                                 style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+                            <path d="M89.282,33.742l-78.35,-0l0,85.043c0,2.458 0.977,4.815 2.715,6.553c1.738,1.738 4.095,2.714 6.553,2.714l59.728,0c2.481,0 4.86,-0.985 6.614,-2.739c1.754,-1.755 2.74,-4.134 2.74,-6.615c-0,-23.831 -0,-84.956 -0,-84.956Z"
+                                  style="stroke:#5E3208;stroke-width:8px;fill:#5E3208"/>
+                                <path d="M25.858,47.818l0,66.701" style="fill:none;stroke:#F79432;stroke-width:8px;"/>
+                                <path d="M49.984,47.818l0,66.701" style="fill:none;stroke:#F79432;stroke-width:8px;"/>
+                                <path d="M74.583,47.818l-0,66.701" style="fill:none;stroke:#F79432;stroke-width:8px;"/>
+                                <rect x="4" y="14.07" width="91.432" height="5.752"
+                                      style="stroke:#5E3208;stroke-width:8px;fill:#5E3208"/>
+                                <rect x="36.83" y="4" width="26.021" height="12.866"
+                                      style="stroke:#5E3208;stroke-width:8px;fill:#5E3208"/></svg>
+                        </button>
+                    </form>
+                </td>
             </tr>
         </table>
 

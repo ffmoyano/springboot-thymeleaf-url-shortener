@@ -4,3 +4,8 @@ function hideUrlError() {
         errorMessage.style.visibility = "hidden";
     }
 }
+
+function copyToClipboard(value) {
+    navigator.clipboard.writeText(value);
+    alert('Copiado al portapapeles: ' + value);
+}

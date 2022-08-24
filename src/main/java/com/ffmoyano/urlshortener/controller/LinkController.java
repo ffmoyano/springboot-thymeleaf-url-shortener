@@ -35,12 +35,24 @@ public class LinkController {
         boolean isUrlValid = linkService.checkIsValid(url);
 
         Link link = linkService.createLinkFromUrl(url);
-        System.out.println("TAMAÑOOOO " + linkService.findByUser());
+
         if (isUrlValid) {
             linkService.save(link);
         } else {
             model.addAttribute("urlError", "La dirección provista no es válida");
         }
+        String baseUrl = request.getServerName();
+        model.addAttribute("baseUrl", baseUrl.equals("localhost")?baseUrl+":"+request.getServerPort()+"/":baseUrl+"/");
+        model.addAttribute("links", linkService.findByUser());
+        return "links";
+    }
+
+    // el thymeleaf no se traga el th:method="delete"
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable(value = "id") Long id, Model model, HttpServletRequest request) {
+
+
+        linkService.deleteById(id);
         String baseUrl = request.getServerName();
         model.addAttribute("baseUrl", baseUrl.equals("localhost")?baseUrl+":"+request.getServerPort()+"/":baseUrl+"/");
         model.addAttribute("links", linkService.findByUser());

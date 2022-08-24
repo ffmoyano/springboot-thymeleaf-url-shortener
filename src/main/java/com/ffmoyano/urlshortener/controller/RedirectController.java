@@ -42,6 +42,8 @@ public class RedirectController {
     public ResponseEntity<String> redirect(@PathVariable(value = "shortUrl") String shortUrl) {
         Link link = linkService.findByShortUrl(shortUrl);
         if(link != null) {
+            link.setClicks(link.getClicks()+1);
+            linkService.save(link);
             return ResponseEntity.status(HttpStatus.FOUND)
                     .location(URI.create(link.getUrl()))
                     .build();

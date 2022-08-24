@@ -2,8 +2,8 @@ table {
     overflow:hidden ;
     border-collapse: collapse;
     border-radius: 8px;
-    -webkit-box-shadow: 0px 0px 0px 2px #FFB66E;
-    box-shadow: 0px 0px 0px 2px #FFB66E;
+    -webkit-box-shadow: 0 0 0 2px #FFB66E;
+    box-shadow: 0 0 0 2px #FFB66E;
     margin: 0 40px 20px 40px;
 }
 
@@ -24,6 +24,33 @@ td {
     font-size: 14px;
 }
 
+button{
+    background: #F79432;
+    color: #5E3208;
+    padding: 4px;
+    border-radius: 8px;
+    border: none;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+button svg {
+    vertical-align: middle;
+    display: inline-block;
+}
+
+button:active {
+    border-color: #5E3208;
+    outline: #5E3208 solid 2px;
+    outline-offset: -2px;
+    animation: outlineSubmitOpacity 300ms
+}
+
+button:focus-visible{
+    border-color: #5E3208;
+    outline: #5E3208 solid 4px;
+    outline-offset: -2px;
+}
 
 input[type="submit"] {
     background: #F79432;
