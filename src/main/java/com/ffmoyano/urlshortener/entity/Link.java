@@ -1,12 +1,6 @@
-package com.ffmoyano.jird.entity;
-
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.hibernate.annotations.ColumnDefault;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.env.Environment;
+package com.ffmoyano.urlshortener.entity;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity

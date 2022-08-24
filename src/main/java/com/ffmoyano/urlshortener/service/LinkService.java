@@ -1,13 +1,12 @@
-package com.ffmoyano.jird.service;
+package com.ffmoyano.urlshortener.service;
 
 
-import com.ffmoyano.jird.entity.Link;
-import com.ffmoyano.jird.repository.LinkRepository;
+import com.ffmoyano.urlshortener.entity.Link;
+import com.ffmoyano.urlshortener.repository.LinkRepository;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.validator.routines.UrlValidator;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -24,6 +24,7 @@ input[type="text"] {
     background: #fff0d3;
     font-size: 20px;
     color: #5E3208;
+    height: 24px;
 }
 
 input[type="password"] {
@@ -33,6 +34,7 @@ input[type="password"] {
     background: #fff0d3;
     font-size: 20px;
     color: #5E3208;
+    height: 24px;
 }
 
 
@@ -59,12 +61,18 @@ input[type="password"] {
     padding: 8px;
 }
 
+
+
 .bold {
     font-weight: bold;
 }
 
 .width100 {
     width: 100%;
+}
+
+.bottom108 {
+    margin-bottom: 108px;
 }
 
 .bottom40 {
@@ -90,8 +98,8 @@ input[type="password"] {
 }
 
 
-.font24 {
-    font-size: 24px;
+.font40 {
+    font-size: 40px;
 }
 
 .height32 {

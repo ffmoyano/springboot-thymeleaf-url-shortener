@@ -1,7 +1,7 @@
-package com.ffmoyano.jird.controller;
+package com.ffmoyano.urlshortener.controller;
 
-import com.ffmoyano.jird.entity.Link;
-import com.ffmoyano.jird.service.LinkService;
+import com.ffmoyano.urlshortener.entity.Link;
+import com.ffmoyano.urlshortener.service.LinkService;
 import org.apache.commons.validator.routines.UrlValidator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

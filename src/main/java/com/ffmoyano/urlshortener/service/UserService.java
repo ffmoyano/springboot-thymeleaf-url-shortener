@@ -1,7 +1,7 @@
-package com.ffmoyano.jird.service;
+package com.ffmoyano.urlshortener.service;
 
-import com.ffmoyano.jird.entity.AppUser;
-import com.ffmoyano.jird.repository.UserRepository;
+import com.ffmoyano.urlshortener.entity.AppUser;
+import com.ffmoyano.urlshortener.repository.UserRepository;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

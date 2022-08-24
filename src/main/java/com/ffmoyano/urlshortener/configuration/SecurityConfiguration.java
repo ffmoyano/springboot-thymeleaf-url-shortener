@@ -1,19 +1,18 @@
-package com.ffmoyano.jird.configuration;
+package com.ffmoyano.urlshortener.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-@EnableWebSecurity
+
 @Configuration
 public class SecurityConfiguration {
 
-    private final String[] ALLOWED_RESOURCES = {"/login", "/resources/**", "/static/**", "/css/**", "/icon/**", "/js/**", "/logo/**", "/favicon.ico"};
+    private final String[] ALLOWED_RESOURCES = {"/login", "/resources/**", "/static/**", "/css/**", "/icon/**", "/js/**", "/logo/**", "static/favicon.ico"};
 
     // UserDetails: UserService which implements UserDetailsService, overrided method loadUserByUsername
     // PasswordEncoder: BCryptPasswordEncoder, whose bean is declared in BeanConfiguration, retrieved by
@@ -24,7 +23,7 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         return http
                 .authorizeRequests(authorize ->
@@ -48,9 +47,7 @@ public class SecurityConfiguration {
                                 .logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout", "GET"))
                                 .invalidateHttpSession(true)
                                 .deleteCookies("JSESSIONID")
-                                .logoutSuccessUrl("/auth/login")
-                                .invalidateHttpSession(true)
-                                .deleteCookies())
+                                .logoutSuccessUrl("/auth/login"))
                 .build();
 
     }

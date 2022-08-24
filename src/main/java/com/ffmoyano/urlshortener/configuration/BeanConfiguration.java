@@ -1,4 +1,4 @@
-package com.ffmoyano.jird.configuration;
+package com.ffmoyano.urlshortener.configuration;
 
 
 import org.apache.commons.validator.routines.UrlValidator;

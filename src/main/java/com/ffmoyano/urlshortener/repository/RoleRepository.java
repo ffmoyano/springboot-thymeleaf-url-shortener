@@ -1,6 +1,6 @@
-package com.ffmoyano.jird.repository;
+package com.ffmoyano.urlshortener.repository;
 
-import com.ffmoyano.jird.entity.Role;
+import com.ffmoyano.urlshortener.entity.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

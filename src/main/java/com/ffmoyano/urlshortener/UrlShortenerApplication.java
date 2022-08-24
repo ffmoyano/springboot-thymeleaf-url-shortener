@@ -1,13 +1,13 @@
-package com.ffmoyano.jird;
+package com.ffmoyano.urlshortener;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class JirdApplication {
+public class UrlShortenerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(JirdApplication.class, args);
+        SpringApplication.run(UrlShortenerApplication.class, args);
     }
 
 }

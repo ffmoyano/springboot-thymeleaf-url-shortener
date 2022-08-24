@@ -1,21 +1,18 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Jird - Acortador de Enlaces</title>
+    <title>Acortador de Enlaces</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/auth.css}" type="text/css"/>
     <link rel="stylesheet" th:href="@{/css/main.css}" type="text/css"/>
     <script th:src="@{/js/login.js}"></script>
+    <link rel="shortcut icon" type="image/png"/>
 </head>
 <body>
 <main id="loginPageContent">
     <div id="loginBox">
-        <div id="loginHeaderDiv">
 
-            <img id="logoHeader" th:src="@{/logo/jirdtitle.svg}" alt="jird logo"/>
-
-        </div>
-        <p class="font24 bottom20">Acortador de enlaces</p>
+        <p class="font40 bottom20">URL shortener</p>
 
         <div id="loginTabs" class="bottom20">
             <p id="loginTab" onclick="selectForm('login')">Login</p>
@@ -23,7 +20,7 @@
         </div>
         <form th:action="@{/auth/login}" method="post" id="loginForm">
             <!-- name attribute in login inputs are defined in spring security loginForm (usernameParameter and passwordParameter),
-             if not defined their default names are username and password -->
+             if not defined their defanult names are username and password -->
             <div class="loginInputDiv bottom40"><img th:src="@{/icon/email.svg}" alt="mail icon"
                                                      class="loginIcon"/> <input placeholder="Email" type="text"
                                                                                 onclick="hideLoginError()"
@@ -44,16 +41,13 @@
             <input class="width100" type="submit" value="LOGIN"/>
         </form>
         <form th:action="@{/auth/signUp}" method="post" id="signUpForm">
-            <div class="loginInputDiv bottom40"><img th:src="@{/icon/smiley.svg}" alt="invite icon"
-                                                     class="loginIcon"/> <input placeholder="Código Invitación"
-                                                                                type="text"
-                                                                                onclick="hideSignupError()"
-                                                                                id="invite" name="invite"/></div>
-            <div class="loginInputDiv bottom20"><img th:src="@{/icon/email.svg}" alt="key icon"
+
+            <div class="loginInputDiv bottom108"><img th:src="@{/icon/email.svg}" alt="key icon"
                                                      class="loginIcon"/> <input placeholder="Email de Registro" type="text"
                                                                                 onclick="hideSignupError()"
                                                                                 id="emailSignup" name="emailSignup"/>
             </div>
+
             <div class="bottom20 height43">
                 <div th:if="${param.error}">
                     <div class="errorDialog" id="hidableSignupError">

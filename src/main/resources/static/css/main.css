@@ -49,7 +49,7 @@ input[type="submit"]:hover {
 }
 
 input[type="submit"]:active, input[type="submit"]:focus {
-    border-color: #5E3208; /* here configure as your needs */
+    border-color: #5E3208;
     outline: #5E3208 solid 4px;
     outline-offset: -4px;
     animation: outlineSubmitOpacity 300ms

@@ -1,4 +1,4 @@
-package com.ffmoyano.jird.entity;
+package com.ffmoyano.urlshortener.entity;
 
 import javax.persistence.*;
 

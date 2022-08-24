@@ -34,6 +34,6 @@ build/
 /logs/
 /.mvn/
 /src/main/resources/application.properties
-/jird.iml
+/shurls.iml
 /mvnw
 /mvnw.cmd

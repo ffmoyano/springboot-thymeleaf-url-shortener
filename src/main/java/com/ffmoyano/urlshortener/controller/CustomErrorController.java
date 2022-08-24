@@ -1,8 +1,7 @@
-package com.ffmoyano.jird.controller;
+package com.ffmoyano.urlshortener.controller;
 
 import org.slf4j.Logger;
 import org.springframework.boot.web.servlet.error.ErrorController;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;

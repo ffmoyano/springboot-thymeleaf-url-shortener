@@ -1,8 +1,8 @@
-package com.ffmoyano.jird.controller;
+package com.ffmoyano.urlshortener.controller;
 
-import com.ffmoyano.jird.entity.Link;
-import com.ffmoyano.jird.service.LinkService;
-import com.ffmoyano.jird.service.UserService;
+import com.ffmoyano.urlshortener.entity.Link;
+import com.ffmoyano.urlshortener.service.LinkService;
+import com.ffmoyano.urlshortener.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
