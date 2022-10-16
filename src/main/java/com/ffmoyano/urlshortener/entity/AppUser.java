@@ -3,6 +3,7 @@ package com.ffmoyano.urlshortener.entity;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "user")
@@ -71,7 +72,7 @@ public class AppUser {
 
         AppUser that = (AppUser) o;
 
-        return id != null ? id.equals(that.id) : that.id == null;
+        return Objects.equals(id, that.id);
     }
 
     @Override
@@ -87,7 +88,6 @@ public class AppUser {
                     email='%s',
                     password='%s',
                     roles='%s'
-                }""").formatted(this.id, this.email, this.password,
-                this.roles);
+                }""").formatted(this.id, this.email, this.password, this.roles);
     }
 }
