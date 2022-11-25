@@ -85,8 +85,7 @@ public class LinkService {
                 linkRepository
                         .findByShortUrlIn(randomStrings)
                         .stream()
-                        .map(link -> link.getShortUrl())
-                        .collect(Collectors.toList());
+                        .map(Link::getShortUrl).toList();
 
         randomStrings.removeAll(existingShortUrls);
         if (randomStrings.size() > 0) {

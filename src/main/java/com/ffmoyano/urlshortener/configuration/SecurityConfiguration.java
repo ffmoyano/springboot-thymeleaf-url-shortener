@@ -26,13 +26,13 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         return http
-                .authorizeRequests(authorize ->
+                .authorizeHttpRequests(authorize ->
                         authorize
-                                .antMatchers(ALLOWED_RESOURCES).permitAll()
-                                .antMatchers("/*").permitAll()  //we dont want to allow subfolders, only shorturl param so only one asterisk
-                                .antMatchers("/auth/**").permitAll()
-                                .antMatchers("/link/**", "/user/**").hasRole("USER")
-                                .antMatchers("/admin/**").hasRole("ADMIN")
+                                .requestMatchers(ALLOWED_RESOURCES).permitAll()
+                                .requestMatchers("/*").permitAll()  //we dont want to allow subfolders, only shorturl param so only one asterisk
+                                .requestMatchers("/auth/**").permitAll()
+                                .requestMatchers("/link/**", "/user/**").hasRole("USER")
+                                .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .anyRequest().authenticated())
                 .formLogin(formLogin ->
                         formLogin

@@ -1,13 +1,12 @@
 package com.ffmoyano.urlshortener.controller;
 
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class CustomErrorController implements ErrorController {
@@ -31,7 +30,7 @@ public class CustomErrorController implements ErrorController {
             model.addAttribute("error", "Ha ocurrido un error al procesar su solicitud");
             return "error";
         } else {
-            return "redirect:/user/links";
+            return "redirect:/link/";
         }
     }
 
