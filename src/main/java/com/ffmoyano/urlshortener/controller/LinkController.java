@@ -30,9 +30,13 @@ public class LinkController {
 
     @PostMapping({"/"})
     public String insert(@RequestParam("newUrl") String url, Model model, HttpServletRequest request) {
-        System.out.println("URL:" + url);
+
+        if (!url.startsWith("http://") && !url.startsWith("https://")) {
+            url = "http://" + url;
+        }
+
         boolean isUrlValid = linkService.checkIsValid(url);
-        System.out.println("IS VALID: " + isUrlValid);
+
         Link link = linkService.createLinkFromUrl(url);
 
         if (isUrlValid) {

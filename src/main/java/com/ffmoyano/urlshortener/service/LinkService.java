@@ -28,10 +28,6 @@ public class LinkService {
     }
 
     public boolean checkIsValid(String url) {
-        if (!url.startsWith("http://") && !url.startsWith("https://")) {
-            url = "http://" + url;
-        }
-
         return urlValidator.isValid(url);
     }
 
