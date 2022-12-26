@@ -1,15 +1,5 @@
-<!DOCTYPE HTML>
-<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-    <link rel="stylesheet" th:href="@{/css/header.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{/css/auth.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{/css/main.css}" type="text/css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Acortador de Enlaces</title>
-</head>
-<body>
-<header id="header" th:fragment="header">
+<header id="header" th:fragment="header" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <div class="headerText" sec:authorize="isAuthenticated()">
         <p class="left20 marginVertical0 bold font14 ellipsisText200" sec:authentication="name"></p>
     </div>
@@ -45,5 +35,3 @@
         </a>
     </div>
 </header>
-</body>
-</html>
