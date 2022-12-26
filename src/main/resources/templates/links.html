@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" th:href="@{/css/header.css}" type="text/css">
     <link rel="stylesheet" th:href="@{/css/auth.css}" type="text/css">
@@ -13,14 +13,17 @@
 </head>
 
 <body>
-<header th:replace="~{fragments/header}"/>
+<header th:replace="~{fragments/header}"></header>
 
 <main>
     <div id="newUrlContainer">
         <form th:action="@{/link/}" th:method="post">
-            <div><input onclick="hideUrlError()" placeholder="Introduce Url" width="100%" type="text"
-                        id="newUrlInput"
-                        name="newUrl"/>
+            <div>
+                <label for="newUrlInput"></label>
+                <input onclick="hideUrlError()" placeholder="Introduce Url"
+                       width="100%" type="text"
+                       id="newUrlInput"
+                       name="newUrl"/>
                 <input type="submit" id="newUrlButton" value="Acortar"/>
             </div>
         </form>
@@ -29,7 +32,7 @@
         <div th:if="${urlError != null}" th:text="${urlError}" class="errorDialog" id="hidableUrlError"/>
     </div>
 
-    <div th:if="${links != null && !links.empty}" class="flexCenter">
+    <div th:if="${not #lists.isEmpty(links)}" class="flexCenter">
         <table>
             <tr>
                 <th class="notMobile">Acortado</th>
