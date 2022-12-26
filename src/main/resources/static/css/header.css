@@ -3,12 +3,12 @@
     top: 0;
     width: 100vw;
     height: 40px;
-    background: #FFA64E;
+    background: #ffffff;
     color: #5E3208;
     display: flex;
     justify-content: space-between;
     align-items: center;
-
+    box-shadow: 0 0 2px 1px rgba(22, 16, 1, 0.13);
 
 }
 
@@ -17,7 +17,7 @@
 }
 
 #header a:hover {
-    color: #fff0d3;
+    color: #F79432;
 }
 
 .marginVertical0 {

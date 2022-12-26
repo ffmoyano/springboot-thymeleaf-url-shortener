@@ -13,15 +13,13 @@
 
 <main>
     <div id="newUrlContainer">
-        <div id="newUrlBox">
-            <form th:action="@{/link/}" th:method="post">
-                <div><input onclick="hideUrlError()" placeholder="Introduce Url" width="100%" type="text"
-                            id="newUrlInput"
-                            name="newUrl"/>
-                    <input type="submit" id="newUrlButton" value="Acortar"/>
-                </div>
-            </form>
-        </div>
+        <form th:action="@{/link/}" th:method="post">
+            <div><input onclick="hideUrlError()" placeholder="Introduce Url" width="100%" type="text"
+                        id="newUrlInput"
+                        name="newUrl"/>
+                <input type="submit" id="newUrlButton" value="Acortar"/>
+            </div>
+        </form>
     </div>
     <div class="flexCenter height43 bottom20">
         <div th:if="${urlError != null}" th:text="${urlError}" class="errorDialog" id="hidableUrlError"/>
@@ -32,13 +30,13 @@
             <tr>
                 <th class="notMobile">Acortado</th>
                 <th>Dirección</th>
-                <th>Visitas</th>
+                <th class="notMobile">Visitas</th>
                 <th>Acciones</th>
             </tr>
             <tr th:each="link: ${links}">
                 <td class="notMobile" th:text="${baseUrl + link.shortUrl}"></td>
                 <td><a th:href="|${link.url}|" th:text="${link.url}" target="_blank"></a></td>
-                <td th:text="${link.clicks}"></td>
+                <td class="notMobile" th:text="${link.clicks}"></td>
                 <td>
                     <button title="Copiar al portapapeles" th:shorturl="${baseUrl + link.shortUrl}"
                             th:onclick="copyToClipboard(this.getAttribute('shorturl'))">

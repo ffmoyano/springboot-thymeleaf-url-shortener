@@ -45,17 +45,17 @@ input[type="password"] {
 .loginInputDiv {
     display: flex;
     align-items: center;
-    border-radius: 8px;
+    border-radius: 4px;
 }
 
 .loginInputDiv > input[type="text"], input[type="password"] {
-    border-radius: 0 8px 8px 0;
+    border-radius: 0 4px 4px 0;
 }
 
 .loginIcon {
-    background: #F79432;
+    background: #FFB66E;
     color: #fffaf6;
-    border-radius: 8px 0 0 8px;
+    border-radius: 4px 0 0 4px;
     height: 32px;
     width: 32px;
     padding: 8px;
@@ -149,8 +149,8 @@ input[type="password"] {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    box-shadow: 0 0 15px 3px rgba(22, 16, 1, 0.13);
-    border-radius: 6px;
+    box-shadow: 0 0 5px 1px rgba(22, 16, 1, 0.13);
+    border-radius: 4px;
     margin-bottom: 15px;
     overflow: auto;
 }
@@ -170,7 +170,7 @@ input[type="password"] {
 
 #loginTabs p {
     padding: 10px;
-    border-radius: 8px;
+    border-radius: 4px;
 }
 
 .selectedLoginTab {

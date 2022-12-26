@@ -20,7 +20,7 @@
         </div>
         <form th:action="@{/auth/login}" method="post" id="loginForm">
             <!-- name attribute in login inputs are defined in spring security loginForm (usernameParameter and passwordParameter),
-             if not defined their defanult names are username and password -->
+             if not defined their default names are username and password -->
             <div class="loginInputDiv bottom40"><img th:src="@{/icon/email.svg}" alt="mail icon"
                                                      class="loginIcon"/> <input placeholder="Email" type="text"
                                                                                 onclick="hideLoginError()"
