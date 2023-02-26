@@ -19,7 +19,6 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @RequestMapping("/")
 public class RedirectController {
 
-
     private final UserService userService;
     private final LinkService linkService;
 
@@ -36,7 +35,6 @@ public class RedirectController {
             return "redirect:/auth/login";
         }
     }
-
 
     @GetMapping("/{shortUrl}")
     public ResponseEntity<String> redirect(@PathVariable(value = "shortUrl") String shortUrl) {

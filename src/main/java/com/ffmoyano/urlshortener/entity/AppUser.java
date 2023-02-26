@@ -19,6 +19,8 @@ public class AppUser {
 
     private String password;
 
+    private boolean active;
+
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "relation_user_role", joinColumns = @JoinColumn(name = "id_user"), inverseJoinColumns = @JoinColumn(name = "id_role"))
     private List<Role> roles;
@@ -36,6 +38,14 @@ public class AppUser {
 
     public String getEmail() {
         return email;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public void setEmail(String email) {
@@ -88,7 +98,8 @@ public class AppUser {
                     id='%s',
                     email='%s',
                     password='%s',
+                    active='%s',
                     roles='%s'
-                }""").formatted(this.id, this.email, this.password, this.roles);
+                }""").formatted(this.id, this.email, this.password, this.active, this.roles);
     }
 }

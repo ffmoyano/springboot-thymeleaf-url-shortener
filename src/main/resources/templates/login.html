@@ -17,22 +17,22 @@
 
         <div id="loginTabs" class="bottom20">
             <p id="loginTab" onclick="selectForm('login')">Login</p>
-            <p id="signUpTab" onclick="selectForm('signup')">Registro</p>
+            <p id="signupTab" onclick="selectForm('signup')">Registro</p>
         </div>
         <form th:action="@{/auth/login}" method="post" id="loginForm">
             <!-- name attribute in login inputs are defined in spring security loginForm (usernameParameter and passwordParameter),
              if not defined their default names are username and password -->
             <div class="loginInputDiv bottom40"><img th:src="@{/icon/email.svg}" alt="mail icon"
                                                      class="loginIcon"/> <input placeholder="Email" type="text"
-                                                                                onclick="hideLoginError()"
+                                                                                onclick="hideError('loginErrorLabel')"
                                                                                 id="email" name="email"/></div>
-            <div class="loginInputDiv bottom20"><img th:src="@{/icon/key.svg}" alt="key icon"
+            <div class="loginInputDiv bottom68"><img th:src="@{/icon/key.svg}" alt="key icon"
                                                      class="loginIcon"/> <input placeholder="Contraseña" type="password"
-                                                                                onclick="hideLoginError()"
+                                                                                onclick="hideError('loginErrorLabel')"
                                                                                 id="password" name="password"/></div>
             <div class="bottom20 height43">
                 <div th:if="${param.error}">
-                    <div class="errorDialog" id="hidableLoginError">
+                    <div class="errorDialog" id="loginErrorLabel">
                         Credenciales inválidas.
                     </div>
                 </div>
@@ -41,24 +41,46 @@
 
             <input class="width100" type="submit" value="LOGIN"/>
         </form>
-        <form th:action="@{/auth/signUp}" method="post" id="signUpForm">
+        <form th:action="@{/auth/signup}" method="post" th:object="${user}" id="signupForm" >
 
-            <div class="loginInputDiv bottom108"><img th:src="@{/icon/email.svg}" alt="key icon"
-                                                     class="loginIcon"/> <input placeholder="Email de Registro" type="text"
-                                                                                onclick="hideSignupError()"
-                                                                                id="emailSignup" name="emailSignup"/>
+            <div class="loginInputDiv bottom20"><img th:src="@{/icon/email.svg}" alt="key icon"
+                                                     class="loginIcon"/> <input placeholder="Email de Registro"
+                                                                                type="text"
+                                                                                th:onkeyup="checkSignup()"
+                                                                                th:onblur="checkSignup()"
+                                                                                onclick="hideError('signupErrorLabel')"
+                                                                                id="emailSignup" name="email"/>
             </div>
+
+
+            <div class="loginInputDiv bottom20"><img th:src="@{/icon/key.svg}" alt="key icon"
+                                                     class="loginIcon"/> <input placeholder="Contraseña" type="password"
+                                                                                th:onkeyup="checkSignup()"
+                                                                                th:onblur="checkSignup()"
+                                                                                onclick="hideError('signupErrorLabel')"
+                                                                                id="passwordSignup" name="password"/>
+            </div>
+
+
+            <div class="loginInputDiv bottom20"><img th:src="@{/icon/key.svg}" alt="key icon"
+                                                     class="loginIcon"/> <input placeholder="Repetir contraseña"
+                                                                                type="password"
+                                                                                onclick="hideError('signupErrorLabel')"
+                                                                                th:onkeyup="checkSignup()"
+                                                                                th:onblur="checkSignup()"
+                                                                                id="passwordRepeat"
+                                                                                /></div>
 
             <div class="bottom20 height43">
                 <div th:if="${param.error}">
-                    <div class="errorDialog" id="hidableSignupError">
-                        Credenciales inválidas.
+                    <div class="errorDialog" id="signupErrorLabel">
+                        Cambiar mensaje y parametro
                     </div>
                 </div>
 
             </div>
 
-            <input class="width100" type="submit" value="REGISTRO"/>
+            <input class="width100" disabled type="submit" id="signupButton" value="REGISTRO" title="El email debe ser válido."/>
         </form>
     </div>
 

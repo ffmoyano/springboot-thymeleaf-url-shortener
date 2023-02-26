@@ -11,16 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class CustomErrorController implements ErrorController {
 
-    private final Logger log;
-
-    public CustomErrorController(Logger log) {
-        this.log = log;
-    }
-
-
     @RequestMapping("/error")
     public String handleError(HttpServletRequest request, Model model, Throwable throwable) {
-        Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
+        var status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
 
         int code = status != null ? Integer.parseInt(status.toString()) : 0;
         if (code == 404) {
@@ -33,5 +26,4 @@ public class CustomErrorController implements ErrorController {
             return "redirect:/link/";
         }
     }
-
 }

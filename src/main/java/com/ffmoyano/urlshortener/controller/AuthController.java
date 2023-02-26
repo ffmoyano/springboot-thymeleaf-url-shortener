@@ -1,9 +1,12 @@
 package com.ffmoyano.urlshortener.controller;
 
+import com.ffmoyano.urlshortener.dto.UserDto;
 import com.ffmoyano.urlshortener.service.UserService;
+import io.micrometer.common.util.StringUtils;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
@@ -15,7 +18,6 @@ public class AuthController {
         this.userService = userService;
     }
 
-
     @GetMapping("/login")
     public String login() {
         if (userService.isUserAuthenticated()) {
@@ -26,5 +28,11 @@ public class AuthController {
 
     }
 
-
+    @PostMapping("/signup")
+    public String signup(@ModelAttribute("user") UserDto user, Model model, HttpServletRequest request) {
+        if(!userService.userExists(user.email()) && StringUtils.isNotEmpty(user.password())) {
+            userService.signup(user);
+        }
+      return "login";
+    }
 }

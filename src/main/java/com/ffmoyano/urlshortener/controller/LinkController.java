@@ -12,13 +12,11 @@ import jakarta.servlet.http.HttpServletRequest;
 @RequestMapping("/link")
 public class LinkController {
 
-
     private final LinkService linkService;
 
     public LinkController(LinkService linkService) {
         this.linkService = linkService;
     }
-
 
     @GetMapping({"/"})
     public String links(Model model, HttpServletRequest request) {
@@ -53,7 +51,6 @@ public class LinkController {
     // el thymeleaf no se traga el th:method="delete"
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable(value = "id") Long id, Model model, HttpServletRequest request) {
-
 
         linkService.deleteById(id);
         String baseUrl = request.getServerName();
