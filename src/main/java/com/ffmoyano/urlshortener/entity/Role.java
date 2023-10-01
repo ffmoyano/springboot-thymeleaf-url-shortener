@@ -1,9 +1,8 @@
 package com.ffmoyano.urlshortener.entity;
 
 
-
-
 import jakarta.persistence.*;
+
 import java.util.List;
 
 @Entity
@@ -50,7 +49,6 @@ public class Role {
     public void setUser(List<AppUser> user) {
         this.user = user;
     }
-
 
 
     @Override

@@ -29,18 +29,14 @@ public class RedirectController {
 
     @GetMapping({"/"})
     public String authRedirect() {
-        if(userService.isUserAuthenticated()) {
-            return "redirect:/link/";
-        } else {
-            return "redirect:/auth/login";
-        }
+        return userService.isUserAuthenticated() ? "redirect:/link/" : "redirect:/auth/login";
     }
 
     @GetMapping("/{shortUrl}")
     public ResponseEntity<String> redirect(@PathVariable(value = "shortUrl") String shortUrl) {
         Link link = linkService.findByShortUrl(shortUrl);
-        if(link != null) {
-            link.setClicks(link.getClicks()+1);
+        if (link != null) {
+            link.setClicks(link.getClicks() + 1);
             linkService.save(link);
             return ResponseEntity.status(HttpStatus.FOUND)
                     .location(URI.create(link.getUrl()))

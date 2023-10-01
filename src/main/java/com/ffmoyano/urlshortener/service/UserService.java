@@ -31,10 +31,10 @@ public class UserService implements UserDetailsService {
         this.encoder = encoder;
     }
 
-    public AppUser getUserFromSession(){
+    public AppUser getUserFromSession() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null) {
-            User principal = (User)authentication.getPrincipal();
+            User principal = (User) authentication.getPrincipal();
             return userRepository.findByEmail(principal.getUsername());
         } else {
             return null;
@@ -70,7 +70,7 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         AppUser user = userRepository.findByEmailAndActive(email, true);
-        if ( user == null) {
+        if (user == null) {
             throw new UsernameNotFoundException("User not found in the database");
         }
         var authorities = new ArrayList<SimpleGrantedAuthority>();

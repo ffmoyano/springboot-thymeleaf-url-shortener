@@ -4,13 +4,13 @@ package com.ffmoyano.urlshortener.service;
 import com.ffmoyano.urlshortener.entity.Link;
 import com.ffmoyano.urlshortener.repository.LinkRepository;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.validator.routines.UrlValidator;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.net.URI;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Service
@@ -18,17 +18,20 @@ public class LinkService {
 
     private final UserService userService;
     private final LinkRepository linkRepository;
-    private final UrlValidator urlValidator;
 
 
-    public LinkService(UserService userService, LinkRepository linkRepository, UrlValidator urlValidator) {
+    public LinkService(UserService userService, LinkRepository linkRepository) {
         this.userService = userService;
         this.linkRepository = linkRepository;
-        this.urlValidator = urlValidator;
     }
 
     public boolean checkIsValid(String url) {
-        return urlValidator.isValid(url);
+        try {
+            new URI(url);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Transactional(readOnly = true)
@@ -36,7 +39,7 @@ public class LinkService {
         return linkRepository.findByUser(userService.getUserFromSession());
     }
 
-    @Transactional(readOnly = false)
+    @Transactional
     public void deleteById(long id) {
         linkRepository.deleteById(id);
     }
@@ -54,7 +57,7 @@ public class LinkService {
         return link;
     }
 
-    @Transactional(readOnly = false)
+    @Transactional
     public Link save(Link link) {
         return linkRepository.save(link);
     }
@@ -84,7 +87,7 @@ public class LinkService {
                         .map(Link::getShortUrl).toList();
 
         randomStrings.removeAll(existingShortUrls);
-        if (randomStrings.size() > 0) {
+        if (!randomStrings.isEmpty()) {
             return randomStrings.get(0);
         } else {
             return generateShortUrl(shortUrlLength++);

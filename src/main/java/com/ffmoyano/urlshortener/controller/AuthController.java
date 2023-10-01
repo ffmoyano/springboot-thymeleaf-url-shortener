@@ -20,19 +20,14 @@ public class AuthController {
 
     @GetMapping("/login")
     public String login() {
-        if (userService.isUserAuthenticated()) {
-            return "redirect:/link/";
-        } else {
-            return "login";
-        }
-
+        return userService.isUserAuthenticated() ? "redirect:/link/" : "login";
     }
 
     @PostMapping("/signup")
     public String signup(@ModelAttribute("user") UserDto user, Model model, HttpServletRequest request) {
-        if(!userService.userExists(user.email()) && StringUtils.isNotEmpty(user.password())) {
+        if (!userService.userExists(user.email()) && StringUtils.isNotEmpty(user.password())) {
             userService.signup(user);
         }
-      return "login";
+        return "login";
     }
 }
