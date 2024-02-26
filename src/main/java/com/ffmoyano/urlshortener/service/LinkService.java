@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.net.URI;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -88,9 +87,9 @@ public class LinkService {
 
         randomStrings.removeAll(existingShortUrls);
         if (!randomStrings.isEmpty()) {
-            return randomStrings.get(0);
+            return randomStrings.getFirst();
         } else {
-            return generateShortUrl(shortUrlLength++);
+            return generateShortUrl(++shortUrlLength);
         }
 
     }
